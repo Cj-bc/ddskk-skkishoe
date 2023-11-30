@@ -33,8 +33,7 @@
 (defgroup ddskk-skkishoe nil
   "Customizations for ddskk-skkishoe"
   :prefix "ddskk-skkishoe/"
-  :group 'skk-server
-  )
+  :group 'skk-server)
 
 (defcustom ddskk-skkishoe/host "localhost"
   "skkishoeサーバーのあるホスト名又は IP アドレス。"
@@ -65,19 +64,19 @@ Equivalent to `skk-search-server'
         (okurigana (or skk-henkan-okurigana
                        skk-okuri-char))
 	(response
-	 (request "http://localhost:8080/candidates"
-		      :params `(("midashi" . ,key))
-		      :headers '(("Content-Type" . "application/json"))
-		      :sync t
-		      :parser (lambda ()
-		       		(let ((json-object-type 'plist))
-		       		  (json-read))))))
-     (seq-map '(lambda (entry)
-		 (let ((annotation (plist-get entry :annotation))
-		       (candidate (plist-get entry :candidate)))
-		   (if (string= annotation "")
-		       candidate
-		     (format "%s;%s" candidate annotation)))) (request-response-data response))))
+	 (request "http://localhost:8080/canidates"
+	   :params `(("midashi" . ,key))
+	   :headers '(("Content-Type" . "application/json"))
+	   :sync t
+	   :parser (lambda ()
+		     (let ((json-object-type 'plist))
+		       (json-read))))))
+    (seq-map '(lambda (entry)
+	 	(let ((annotation (plist-get entry :annotation))
+	 	      (candidate (plist-get entry :candidate)))
+	 	  (if (string= annotation "")
+	 	      candidate
+	 	    (format "%s;%s" candidate annotation)))) (request-response-data response))))
 
 (defun ddskk-skkishoe/setup
     (push '(ddskk-skkishoe/search-server) skk-search-prog-list))
