@@ -76,11 +76,15 @@ Equivalent to `skk-search-server'
 	   :parser (lambda ()
 		     (let ((json-object-type 'plist))
 		       (json-read))))))
-    (seq-map '(lambda (entry)
+
+    ; `skk-okuri-search' の実装にて機能が無効であれば nil を返してい
+    ; るので、無効な場合は nil を返せばいい模様。
+    (if (request-response-error-thrown response) nil
+      (seq-map '(lambda (entry)
 		(pcase (cons (plist-get entry :annotation) (plist-get entry :candidate))
 		  (`("" . ,cand) cand)
 		  (`(,ann . ,cand) (format "%s;%s" cand ann))))
-	     (request-response-data response))))
+	     (request-response-data response)))))
 
 (defun ddskk-skkishoe/setup
     (push '(ddskk-skkishoe/search-server) skk-search-prog-list))
