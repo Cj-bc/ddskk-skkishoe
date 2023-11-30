@@ -77,11 +77,10 @@ Equivalent to `skk-search-server'
 		     (let ((json-object-type 'plist))
 		       (json-read))))))
     (seq-map '(lambda (entry)
-	 	(let ((annotation (plist-get entry :annotation))
-	 	      (candidate (plist-get entry :candidate)))
-	 	  (if (string= annotation "")
-	 	      candidate
-	 	    (format "%s;%s" candidate annotation)))) (request-response-data response))))
+		(pcase (cons (plist-get entry :annotation) (plist-get entry :candidate))
+		  (`("" . ,cand) cand)
+		  (`(,ann . ,cand) (format "%s;%s" cand ann))))
+	     (request-response-data response))))
 
 (defun ddskk-skkishoe/setup
     (push '(ddskk-skkishoe/search-server) skk-search-prog-list))
