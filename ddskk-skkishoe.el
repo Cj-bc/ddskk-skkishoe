@@ -40,6 +40,11 @@
   :type 'string
   :group 'ddskk-skkishoe)
 
+(defcustom ddskk-skkishoe/portnum 80
+  "skkishoeサーバーのポート番号。"
+  :type 'natnum
+  :group 'ddskk-skkishoe)
+
 
 (defun ddskk-skkishoe/server-version ()
   "Skkishoe implementation of `skk-server-version'
