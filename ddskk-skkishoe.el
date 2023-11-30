@@ -86,10 +86,10 @@ Equivalent to `skk-search-server'
 		  (`(,ann . ,cand) (format "%s;%s" cand ann))))
 	     (request-response-data response)))))
 
-(defun ddskk-skkishoe/setup
+(defun ddskk-skkishoe/setup ()
     (push '(ddskk-skkishoe/search-server) skk-search-prog-list))
 
-(defun skkishoe/teadown
+(defun skkishoe/teadown ()
     (setq skk-search-prog-list (remove '(ddskk-skkishoe/search-server) skk-search-prog-list)))
 
 (provide 'ddskk-skkishoe)
