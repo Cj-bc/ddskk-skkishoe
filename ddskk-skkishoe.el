@@ -69,7 +69,7 @@ Equivalent to `skk-search-server'
         (okurigana (or skk-henkan-okurigana
                        skk-okuri-char))
 	(response
-	 (request "http://localhost:8080/canidates"
+	 (request (format "http://%s:%d/candidates" ddskk-skkishoe/host ddskk-skkishoe/portnum)
 	   :params `(("midashi" . ,key))
 	   :headers '(("Content-Type" . "application/json"))
 	   :sync t
