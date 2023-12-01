@@ -1,0 +1,29 @@
+* ddskk-skkishoe -- Skkishoe server integration for DDSKK
+DDSKKで[[https://github.com/Cj-bc/skkishoe][Cj-bc/skkishoe]]を辞書サーバーとして使う為のパッケージです。
+
+** 使い方
+別途skkishoeサーバーを立ち上げてください。適宜 ~ddskk-skkishoe/host~,
+~ddskk-skkishoe/portnum~ を設定し、 ~ddskk-skkishoe/setup~ を実行する
+とDDSKKで使用出来るようになります。
+
+後は普通に普段通りの扱い方が出来るはずです。skkishoeサーバーに接続出来
+ればそれを使えるようになり、出来なければ単純に無視されます。
+
+無効化したい場合は ~(ddskk-skkishoe/teadown)~ で行うことが出来ます。
+
+** インストール
+*** [[https://github.com/conao3/leaf.el][conao3/leaf.el]]を用いる場合
+
+#+begin_src elisp
+  (leaf ddskk-skkishoe
+    :el-get Cj-bc/ddskk-skkishoe
+    :requier t
+    :after ddskk request-deferred
+    :custom
+    (ddskk-skkishoe/host . "YOUR_SERVER_ADDRESS") ;; 使用したいサーバーのアドレス
+    (ddskk-skkishoe/portnum . 8080) ;; 使用したいサーバーのポート番号
+    :config
+    (ddskk-skkishoe/setup))
+#+end_src
+
+
