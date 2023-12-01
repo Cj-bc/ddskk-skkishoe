@@ -4,7 +4,7 @@
 
 ;; Author:  Cj-bc/陽鞠莉桜 <cj.bc-sd@outlook.jp>
 ;; Keywords: 
-;; Package-Requires: (request-deferred deferred ddskk)
+;; Package-Requires: (request ddskk)
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 
 ;;; Code:
 
-(require 'request-deferred)
+(require 'request)
 (require 'ddskk)
 
 ;; skk-search-prog-list に載せればいいぽい？
