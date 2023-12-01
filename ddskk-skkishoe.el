@@ -46,11 +46,6 @@
   :group 'ddskk-skkishoe)
 
 
-(defun ddskk-skkishoe/server-version ()
-  "Skkishoe implementation of `skk-server-version'
-"
-  (interactive))
-
 (defun ddskk-skkishoe/search-server ()
   "Find candidates and return as list.
 Equivalent to `skk-search-server'
