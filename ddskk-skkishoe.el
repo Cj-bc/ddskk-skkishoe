@@ -67,6 +67,15 @@ Equivalent to `skk-search-server'
 	 (request (format "http://%s:%d/candidates" ddskk-skkishoe/host ddskk-skkishoe/portnum)
 	   :params `(("midashi" . ,key))
 	   :headers '(("Content-Type" . "application/json"))
+	   ;; `request' は処理中にエラーが起きた場合、メッセージに表示
+	   ;; する。(正確には、内部で呼ばれている`request--callback')。
+	   ;; 基本的にはそれで良いのだが、「サーバーと通信出来ない」場
+	   ;; 合は単純にskkishoeを使えない状態なだけで異常とはしたくな
+	   ;; い。そのためエラーメッセージを表示すると紛らわしい。そこ
+	   ;; で、空のメッセージで上書きする
+	   :error
+	   (cl-function (lambda (&rest args &key error-thrown &allow-other-keys) ""
+			  (when (string= (cdr error-thrown) "exited abnormally with code 7\n") (message ""))))
 	   :sync t
 	   :parser (lambda ()
 		     (let ((json-object-type 'plist))
