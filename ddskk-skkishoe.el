@@ -64,8 +64,7 @@ Equivalent to `skk-search-server'
         (okurigana (or skk-henkan-okurigana
                        skk-okuri-char))
 	(response
-	 (request (format "http://%s:%d/candidates" ddskk-skkishoe/host ddskk-skkishoe/portnum)
-	   :params `(("midashi" . ,key))
+	 (request (format "http://%s:%d/midashis/%s" ddskk-skkishoe/host ddskk-skkishoe/portnum key)
 	   :headers '(("Content-Type" . "application/json"))
 	   ;; `request' は処理中にエラーが起きた場合、メッセージに表示
 	   ;; する。(正確には、内部で呼ばれている`request--callback')。
